@@ -9,5 +9,7 @@ public class Main {
         System.out.println(BitShifting.modularExponentiation(4, 13, 497));
 
         System.out.println(UniqueString.isUniqueChars("abcdefgarjiok"));
+
+        System.out.println(Permutations.isPermutation("racecar", "rrcieaa"));
     }
 }
