@@ -18,7 +18,4 @@ public class SubArrayForLoop {
         }
         return false;
     }
-    /*
-    Try putting everything into a hashmap and then checking your hash
-     */
 }
