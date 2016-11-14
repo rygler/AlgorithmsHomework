@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -19,6 +20,25 @@ public class Permutations {
         }
 
         return checker == 0;
+    }
+
+    public static boolean isPermutationOfPalindrome(String string) {
+        boolean[] indexArray = new boolean[256];
+        Arrays.fill(indexArray, true);
+
+        int oddCount = 0;
+
+        for (int i = 0; i < string.length(); i++) {
+            int idx = (int) string.charAt(i);
+            indexArray[idx] = !indexArray[idx];
+
+            if (indexArray[idx])
+                oddCount--;
+            else
+                oddCount++;
+        }
+
+        return (string.length() % 2 == 0) ? oddCount == 0 : oddCount == 1;
     }
 
 }
