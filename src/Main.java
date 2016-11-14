@@ -10,6 +10,7 @@ public class Main {
 
         System.out.println(UniqueString.isUniqueChars("abcdefgarjiok"));
 
-        System.out.println(Permutations.isPermutation("racecar", "rrcieaa"));
+        System.out.println(Permutations.PermutationsMatcher.isPermutation("racecar", "rrcieaa"));
+
     }
 }
