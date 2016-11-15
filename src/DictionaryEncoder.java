@@ -7,27 +7,23 @@ import java.util.Map;
  * Created by Raphael on 11/14/2016.
  */
 public class DictionaryEncoder {
+
+    // WARNING - Still In Progress!!!
+
     HashMap<Integer, String> dictionary;
     List<Integer> code;
-    int counter = 0;
+    int counter;
 
     public void encode(String string) {
         dictionary = new HashMap<>();
         code = new ArrayList<>();
+        counter = 0;
 
         String zig = string.substring(0, 1);
-        code.add(counter);
-        dictionary.put(counter++, zig);
+//        code.add(counter);
+//        dictionary.put(counter++, zig);
+
         String wig;
-//        for (int i = 0; i < string.length(); i++) {
-//            zig = string.substring(i, i + 1);
-//            for (int j = i + 1; j < string.length(); j++) {
-//                String wig = string.substring(i, j);
-//                if (!dictionary.containsValue(wig)) {
-//                    dictionary.put(counter++, wig);
-//                }
-//            }
-//        }
         for (int i = 1; i < string.length(); i++) {
             wig = string.substring(i, i + 1);
 
@@ -35,20 +31,25 @@ public class DictionaryEncoder {
 
             if (dictionary.containsValue(zigwig)){
                 zig = zigwig;
+//                code.remove(code.size());
             } else {
                 code.add(counter);
                 dictionary.put(counter++, zigwig);
                 zig = wig;
             }
+
         }
 
-        for (int i = 0; i < code.size(); i++) {
-            System.out.println(code.get(i) + ": " + dictionary.get(code.get(i)));
-        }
+
         dictionary.values().stream().forEach(System.out::println);
+        code.stream().forEach(System.out::println);
     }
 
-//    public String decode() {
-//
-//    }
+    public String decode(List<Integer> code) {
+        String string = "";
+        for (int i = 0; i < code.size(); i++) {
+            string += dictionary.get(code.get(i));
+        }
+        return string;
+    }
 }

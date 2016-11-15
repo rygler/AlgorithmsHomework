@@ -13,6 +13,7 @@ public class Main {
 //
 //        System.out.println(Permutations.PermutationsMatcher.isPermutation("racecar", "rrcieaa"));
         DictionaryEncoder de = new DictionaryEncoder();
-        de.encode("bananaban");
+        de.encode("bananana");
+        de.encode("hurlyburly");
     }
 }
