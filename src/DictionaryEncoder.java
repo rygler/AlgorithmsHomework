@@ -8,48 +8,33 @@ import java.util.Map;
  */
 public class DictionaryEncoder {
 
-    // WARNING - Still In Progress!!!
-
-    HashMap<Integer, String> dictionary;
-    List<Integer> code;
+    Map<Integer, String> dictionary;
     int counter;
 
     public void encode(String string) {
         dictionary = new HashMap<>();
-        code = new ArrayList<>();
-        counter = 0;
+        char c;
 
-        String zig = string.substring(0, 1);
-//        code.add(counter);
-//        dictionary.put(counter++, zig);
-
-        String wig;
-        for (int i = 1; i < string.length(); i++) {
-            wig = string.substring(i, i + 1);
-
-            String zigwig = zig + wig;
-
-            if (dictionary.containsValue(zigwig)){
-                zig = zigwig;
-//                code.remove(code.size());
-            } else {
-                code.add(counter);
-                dictionary.put(counter++, zigwig);
-                zig = wig;
-            }
-
+        for (int i = 32; i < 127; i++) {
+            c = (char) i;
+            dictionary.put(i - 32, String.format("%s", c));
         }
 
+        counter = 128 - 32;
+
+        String s = "";
+
+        for (int i = 0; i < string.length(); i++) {
+            c = string.charAt(i);
+
+            if (dictionary.containsValue(s + c)) {
+                s = s + c;
+            } else {
+                dictionary.put(counter++, s + c);
+                s = c + "";
+            }
+        }
 
         dictionary.values().stream().forEach(System.out::println);
-        code.stream().forEach(System.out::println);
-    }
-
-    public String decode(List<Integer> code) {
-        String string = "";
-        for (int i = 0; i < code.size(); i++) {
-            string += dictionary.get(code.get(i));
-        }
-        return string;
     }
 }
