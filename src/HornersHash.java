@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class HornersRule {
+public class HornersHash {
 
     public static int calculateHash(String s, int x) {
 
