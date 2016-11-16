@@ -5,15 +5,12 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
-/**
- * Created by Raphael on 9/11/2016.
- */
 public class SeriesBuilder {
     public static int[] getSeries(int amount, int power) {
         int[] series = new int[amount];
 
         for (int i = 0; i < amount; i++) {
-            int a = ((int) Math.pow(((double) i) , ((double) power)));
+            int a = ((int) Math.pow(((double) i), ((double) power)));
             int b = ((int) Math.pow(((double) (i + 1)), ((double) power)));
             series[i] = a + b;
         }
@@ -21,10 +18,10 @@ public class SeriesBuilder {
         return series;
     }
 
-    public static Set<Integer> getModsOfNumber(int[] series, int mod) {
+    private static Set<Integer> getModsOfNumber(int[] series, int mod) {
         HashSet<Integer> mods = new HashSet<>();
-        for (int i = 0; i < series.length; i++) {
-            mods.add(series[i] % mod);
+        for (int i : series) {
+            mods.add(i % mod);
 
         }
         return mods;
@@ -40,7 +37,7 @@ public class SeriesBuilder {
     }
 
 
-    public static Set<Integer> getNMod4Numbers(int n, Set<Integer> numbers) {
+    private static Set<Integer> getNMod4Numbers(int n, Set<Integer> numbers) {
         HashSet<Integer> results = new HashSet<>();
 
         Iterator iterator = numbers.iterator();
@@ -57,7 +54,7 @@ public class SeriesBuilder {
     public static Hashtable<Integer, HashSet<Integer>> getAllMods(int[] series, int upperBound) {
         Hashtable<Integer, HashSet<Integer>> results = new Hashtable<>();
         for (int i = 0; i < upperBound; i++) {
-            results.put(i, (HashSet<Integer>) getModsOfNumber(series, i ));
+            results.put(i, (HashSet<Integer>) getModsOfNumber(series, i));
         }
         return results;
     }

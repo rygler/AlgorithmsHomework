@@ -4,9 +4,6 @@ import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Raphael on 9/11/2016.
- */
 public class PhiFunction {
 
     public static Set<Integer> getPhiValues(int number) {

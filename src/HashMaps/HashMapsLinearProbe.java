@@ -2,25 +2,16 @@ package HashMaps;
 
 import java.util.Arrays;
 
-/**
- * Created by Raphael Gal on 11/7/2016.
- */
 public class HashMapsLinearProbe {
-    int[] backingArray;
+    private int[] backingArray;
 
     public HashMapsLinearProbe(int... numbers) {
         backingArray = new int[numbers.length];
         int index;
 
-        for (int i = 0; i < numbers.length; i++) {
-
-            index = getHashIndex(numbers[i]);
-
-            backingArray[index] = numbers[i];
-
-            System.out.println("----------------------");
-            System.out.println("round " + i);
-            Arrays.stream(backingArray).forEach(System.out::println);
+        for (int number : numbers) {
+            index = getHashIndex(number);
+            backingArray[index] = number;
         }
     }
 

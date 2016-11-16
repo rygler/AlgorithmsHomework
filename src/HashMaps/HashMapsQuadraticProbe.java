@@ -1,24 +1,14 @@
 package HashMaps;
 
-import java.util.Arrays;
-
-/**
- * Created by Raphael on 11/14/2016.
- */
 public class HashMapsQuadraticProbe {
-    int[] backingArray;
+    private int[] backingArray;
 
     public HashMapsQuadraticProbe(int... numbers) {
         backingArray = new int[numbers.length];
 
-        for (int i = 0; i < numbers.length; i++) {
-            int index = getHashIndex(numbers[i]);
-
-            backingArray[index] = numbers[i];
-
-            System.out.println("----------------------");
-            System.out.println("round " + i);
-            Arrays.stream(backingArray).forEach(System.out::println);
+        for (int number : numbers) {
+            int index = getHashIndex(number);
+            backingArray[index] = number;
         }
     }
 

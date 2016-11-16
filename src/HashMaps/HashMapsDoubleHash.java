@@ -1,24 +1,15 @@
 package HashMaps;
 
-import java.util.Arrays;
-
-/**
- * Created by Raphael Gal on 11/7/2016.
- */
 public class HashMapsDoubleHash {
-    int[] backingArray;
+    private int[] backingArray;
 
     public HashMapsDoubleHash(int... numbers) {
         backingArray = new int[numbers.length];
 
-        for (int i = 0; i < numbers.length; i++) {
-            int index = getHashIndex(numbers[i]);
+        for (int number : numbers) {
+            int index = getHashIndex(number);
 
-            backingArray[index] = numbers[i];
-
-            System.out.println("----------------------");
-            System.out.println("round " + i);
-            Arrays.stream(backingArray).forEach(System.out::println);
+            backingArray[index] = number;
         }
     }
 

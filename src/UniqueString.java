@@ -1,9 +1,6 @@
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by Raphael on 10/30/2016.
- */
 public class UniqueString {
 
     public static boolean isUniqueChars(String string) {

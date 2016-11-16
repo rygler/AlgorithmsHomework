@@ -1,9 +1,7 @@
 package ModularExponentiation;
 
-/**
- * Created by Raphael on 11/14/2016.
- */
 public class BitShifting {
+
     public static int modularExponentiation(int base, int exponent, int modulus) {
         if (modulus == 1) {
             return 0;

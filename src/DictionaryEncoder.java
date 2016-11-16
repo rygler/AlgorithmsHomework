@@ -1,15 +1,10 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Raphael on 11/14/2016.
- */
 public class DictionaryEncoder {
 
-    Map<Integer, String> dictionary;
-    int counter;
+    private Map<Integer, String> dictionary;
+    private int counter;
 
     public void encode(String string) {
         dictionary = new HashMap<>();
@@ -35,6 +30,6 @@ public class DictionaryEncoder {
             }
         }
 
-        dictionary.values().stream().forEach(System.out::println);
+        dictionary.values().forEach(System.out::println);
     }
 }

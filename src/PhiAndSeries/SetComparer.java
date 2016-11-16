@@ -5,9 +5,6 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 
-/**
- * Created by Raphael on 9/12/2016.
- */
 public class SetComparer {
     private static Hashtable<Integer, HashSet<Integer>> seriesModN;
     private static Hashtable<Integer, HashSet<Integer>> seriesPhiNumbers;
