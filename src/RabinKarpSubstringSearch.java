@@ -2,81 +2,51 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class RabinKarpSubstringSearch {
-    private String pattern;
-    private long patternHashValue;
-    private int patternLength;
-    private long largePrime;
-    private int radix;
-    private long RM;
 
-    public RabinKarpSubstringSearch(String string, String pattern) {
+    private int prime = 101;
 
-        this.pattern = pattern;
-        radix = 256;
-        patternLength = pattern.length();
-        largePrime = longRandomPrime();
-
-        RM = 1;
-        for (int i = 1; i <= patternLength - 1; i++) {
-            RM = (radix * RM) % largePrime;
-        }
-
-        patternHashValue = hash(pattern, patternLength);
-
-        int position = search(string);
-
-        if (position == -1) {
-            System.out.println("No Match");
-        } else {
-            System.out.println("Pattern found at position : " + position);
-        }
-    }
-
-    private long hash(String key, int M) {
-        long h = 0;
-        for (int i = 0; i < M; i++) {
-            h = (radix * h + key.charAt(i)) % largePrime;
-        }
-        return h;
-    }
-
-    private boolean check(String txt, int i) {
-
-        for (int j = 0; j < patternLength; j++) {
-            if (pattern.charAt(j) != txt.charAt(i + j)) {
-                return false;
+    public int patternSearch(char[] text, char[] pattern){
+        int m = pattern.length;
+        int n = text.length;
+        long patternHash = createHash(pattern, m - 1);
+        long textHash = createHash(text, m - 1);
+        for (int i = 1; i <= n - m + 1; i++) {
+            if(patternHash == textHash && checkEqual(text, i - 1, i + m - 2, pattern, 0, m - 1)) {
+                return i - 1;
+            }
+            if(i < n - m + 1) {
+                textHash = recalculateHash(text, i - 1, i + m - 1, textHash, m);
             }
         }
-        return true;
-    }
-
-    private int search(String text) {
-        int N = text.length();
-        if (N < patternLength) {
-            return N;
-        }
-
-        long textHash = hash(text, patternLength);
-
-        if ((patternHashValue == textHash) && check(text, 0)) {
-            return 0;
-        }
-
-        for (int i = patternLength; i < N; i++) {
-            textHash = (textHash + largePrime - RM * text.charAt(i - patternLength) % largePrime) % largePrime;
-            textHash = (textHash * radix + text.charAt(i)) % largePrime;
-
-            int offset = i - patternLength + 1;
-            if ((patternHashValue == textHash) && check(text, offset)) {
-                return offset;
-            }
-        }
-
         return -1;
     }
 
-    private static long longRandomPrime() {
-        BigInteger prime = BigInteger.probablePrime(31, new Random());
-        return prime.longValue();
+    private long recalculateHash(char[] str,int oldIndex, int newIndex,long oldHash, int patternLen) {
+        long newHash = oldHash - str[oldIndex];
+        newHash = newHash/prime;
+        newHash += str[newIndex]*Math.pow(prime, patternLen - 1);
+        return newHash;
+    }
+
+    private long createHash(char[] str, int end){
+        long hash = 0;
+        for (int i = 0 ; i <= end; i++) {
+            hash += str[i]*Math.pow(prime,i);
+        }
+        return hash;
+    }
+
+    private boolean checkEqual(char str1[],int start1,int end1, char str2[],int start2,int end2){
+        if(end1 - start1 != end2 - start2) {
+            return false;
+        }
+        while(start1 <= end1 && start2 <= end2){
+            if(str1[start1] != str2[start2]){
+                return false;
+            }
+            start1++;
+            start2++;
+        }
+        return true;
     }
 }
