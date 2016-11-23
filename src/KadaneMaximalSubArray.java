@@ -6,9 +6,7 @@ public class KadaneMaximalSubArray {
 
         int cumulativeSum = 0;
 
-        for (int currentIndex = 0; currentIndex < inputArray.length; currentIndex++) {
-
-            int eachArrayItem = inputArray[currentIndex];
+        for (int eachArrayItem : inputArray) {
 
             cumulativeSum += eachArrayItem;
 
