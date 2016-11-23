@@ -1,10 +1,12 @@
 public class KadaneMaximalSubArray {
 
-    public static int splitArray(int[] full) {
+    private static int i;
+
+    public static int findMaximumSum(int[] full) {
         int sum_final = 0;
         int max_final = 0;
-        for (int j = 0; j < full.length; j++) {
-            sum_final = localMax(full, j);
+        for (i = 0; i < full.length; i++) {
+            sum_final = localMax(full, i);
             if (sum_final > max_final) {
                 max_final = sum_final;
             }
