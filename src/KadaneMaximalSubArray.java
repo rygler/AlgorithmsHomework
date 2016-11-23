@@ -1,30 +1,26 @@
 public class KadaneMaximalSubArray {
 
-    private static int i;
+    public static void findMaxSubArray(int[] inputArray) {
 
-    public static int findMaximumSum(int[] full) {
-        int sum_final = 0;
-        int max_final = 0;
-        for (i = 0; i < full.length; i++) {
-            sum_final = localMax(full, i);
-            if (sum_final > max_final) {
-                max_final = sum_final;
+        int maxSum = Integer.MIN_VALUE;
+
+        int cumulativeSum = 0;
+
+        for (int currentIndex = 0; currentIndex < inputArray.length; currentIndex++) {
+
+            int eachArrayItem = inputArray[currentIndex];
+
+            cumulativeSum += eachArrayItem;
+
+            if (cumulativeSum > maxSum) {
+                System.out.println(cumulativeSum);
+                maxSum = cumulativeSum;
+            } else if (cumulativeSum < 0) {
+                cumulativeSum = 0;
             }
         }
 
-        return max_final;
-    }
+        System.out.println("Max sum: " + maxSum);
 
-    private static int localMax(int[] full, int sublength) {
-        int sum = 0;
-        int max = 0;
-        for (int i = sublength; i >= 0; i--) {
-            sum = sum + full[i];
-            if (sum > max) {
-                max = sum;
-            }
-        }
-        sum = 0;
-        return max;
     }
 }
