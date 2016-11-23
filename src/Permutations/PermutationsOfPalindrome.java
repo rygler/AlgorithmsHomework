@@ -17,10 +17,11 @@ public class PermutationsOfPalindrome {
             int idx = (int) string.charAt(i);
             indexArray[idx] = !indexArray[idx];
 
-            if (indexArray[idx])
+            if (indexArray[idx]) {
                 oddCount--;
-            else
+            } else {
                 oddCount++;
+            }
         }
 
         return (string.length() % 2 == 0) ? oddCount == 0 : oddCount == 1;
