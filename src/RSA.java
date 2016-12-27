@@ -31,7 +31,7 @@ public class RSA {
     }
 
     public int decrypt(int ciphertext) {
-        return (int) ((Math.pow(ciphertext, e) % n));
+        return (int) ((Math.pow(ciphertext, d) % n));
     }
 
     private int getRandomPrime(int min, int max) {
