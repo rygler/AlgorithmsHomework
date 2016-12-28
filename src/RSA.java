@@ -1,37 +1,41 @@
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- *
- * @author Rafi
+ * Created by Rafi
  */
 public class RSA {
-
     int p, q, n, phiOfN, e, d;
 
     public RSA() {
         // Generate two random primes
-        p = getRandomPrime(1, 255);
-        q = getRandomPrime(1, 255);
+        p = getRandomPrime(1, 100);
+
+        q = getRandomPrime(1, 100);
+
 
         // n = pq
         n = p * q;
 
+
         // compute the totient of n
         phiOfN = getPhi(n);
+
 
         // Compute coprime e, where 1 < e < phiOfN
         e = getRandomPrime(1, phiOfN);
 
+
         // Compute the modular multiplicative inverse of e
         d = modInverse(e, phiOfN);
+
     }
 
     public int encrypt(int plaintext) {
-        return (int) ((Math.pow(plaintext, e) % n));
+        return modPow(plaintext, e, n);
     }
 
     public int decrypt(int ciphertext) {
-        return (int) ((Math.pow(ciphertext, d) % n));
+        return modPow(ciphertext, d, n);
     }
 
     private int getRandomPrime(int min, int max) {
@@ -73,7 +77,7 @@ public class RSA {
         return getGCD(b, a % b);
     }
 
-    private int modInverse(int a, int m) {
+    public int modInverse(int a, int m) {
         int m0 = m, t, z;
         int x0 = 0, x1 = 1;
 
@@ -107,4 +111,18 @@ public class RSA {
         return x1;
     }
 
+    public int modPow(int base, int exponent, int modulus) {
+        if (exponent < 0)
+            throw new IllegalArgumentException("exponent < 0");
+        int result = 1;
+        while (exponent > 0) {
+            if ((exponent & 1) != 0) {
+                result = (result * base) % modulus;
+            }
+            exponent >>>= 1;
+            base = (base * base) % modulus;
+        }
+        return result;
+
+    }
 }
