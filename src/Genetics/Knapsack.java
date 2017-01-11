@@ -7,21 +7,21 @@ import java.util.Arrays;
  * @author rgal
  */
 public class Knapsack {
-    private int chromosome[];
+    private boolean chromosome[];
     private int totalWeight;
     private int totalValue;
     
-    public Knapsack(int chromosome[]) {
+    public Knapsack(boolean chromosome[]) {
         this.chromosome = chromosome;
         totalWeight = 0;
         totalValue = 0;
     }
 
-    public int[] getChromosome() {
+    public boolean[] getChromosome() {
         return chromosome;
     }
 
-    public void setChromosome(int chromosome[]) {
+    public void setChromosome(boolean chromosome[]) {
         this.chromosome = chromosome;
     }
 

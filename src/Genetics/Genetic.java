@@ -21,6 +21,7 @@ public class Genetic {
         this.numberOfGenerations = numberOfGenerations;
 
         generateRandomItems(numberOfItems);
+
         for (Item item : items) {
             System.out.println(item);
         }
@@ -43,13 +44,11 @@ public class Genetic {
 
     private void generateKnapsacks() {
         for (int i = 0; i < knapsacks.length; i++) {
-            int chromosome[] = new int[items.length];
+            boolean chromosome[] = new boolean[items.length];
 
             for (int j = 0; j < chromosome.length; j++) {
                 if (ThreadLocalRandom.current().nextDouble() < 0.1) {
-                    chromosome[j] = 1;
-                } else {
-                    chromosome[j] = 0;
+                    chromosome[j] = true;
                 }
 
                 knapsacks[i] = new Knapsack(chromosome);
@@ -76,8 +75,8 @@ public class Genetic {
                 int totalValue = 0;
 
                 for (int geneIndex = 0; geneIndex < knapsacks[index].getChromosome().length; geneIndex++) {
-                    int gene = knapsacks[index].getChromosome()[geneIndex];
-                    if (gene == 1) {
+                    boolean gene = knapsacks[index].getChromosome()[geneIndex];
+                    if (gene) {
                         totalWeight += items[geneIndex].getWeight();
                         totalValue += items[geneIndex].getValue();
                     }
@@ -137,13 +136,13 @@ public class Genetic {
 
             // Perform Crossover
             int splitPoint = ThreadLocalRandom.current().nextInt(knapsacks.length - 1);
-            int[] front1 = Arrays.copyOfRange(knapsacks[randomKnapsack1].getChromosome(), 0, splitPoint);
-            int[] front2 = Arrays.copyOfRange(knapsacks[randomKnapsack2].getChromosome(), 0, splitPoint);
-            int[] back1 = Arrays.copyOfRange(knapsacks[randomKnapsack1].getChromosome(), splitPoint, items.length);
-            int[] back2 = Arrays.copyOfRange(knapsacks[randomKnapsack2].getChromosome(), splitPoint, items.length);
+            boolean[] front1 = Arrays.copyOfRange(knapsacks[randomKnapsack1].getChromosome(), 0, splitPoint);
+            boolean[] front2 = Arrays.copyOfRange(knapsacks[randomKnapsack2].getChromosome(), 0, splitPoint);
+            boolean[] back1 = Arrays.copyOfRange(knapsacks[randomKnapsack1].getChromosome(), splitPoint, items.length);
+            boolean[] back2 = Arrays.copyOfRange(knapsacks[randomKnapsack2].getChromosome(), splitPoint, items.length);
 
-            int[] newChromosome1 = ArrayUtils.addAll(front1, back2);
-            int[] newChromosome2 = ArrayUtils.addAll(front2, back1);
+            boolean[] newChromosome1 = ArrayUtils.addAll(front1, back2);
+            boolean[] newChromosome2 = ArrayUtils.addAll(front2, back1);
 
             knapsacks[randomKnapsack1] = new Knapsack(newChromosome1);
             knapsacks[randomKnapsack2] = new Knapsack(newChromosome2);
@@ -157,9 +156,9 @@ public class Genetic {
                     if (ThreadLocalRandom.current().nextDouble() < 0.01) {
                         System.out.println("Successful mutation at gene: " + j);
 
-                        int gene = knapsacks[i].getChromosome()[j];
+                        boolean gene = knapsacks[i].getChromosome()[j];
 
-                        gene = gene == 0 ? 1 :  0;
+                        gene = !gene;
 
                         knapsacks[i].getChromosome()[j] = gene;
                     }
