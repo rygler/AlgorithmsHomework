@@ -44,7 +44,8 @@ public class Genetic {
 
     private void generateKnapsacks() {
         for (int i = 0; i < knapsacks.length; i++) {
-            boolean chromosome[] = new boolean[items.length];
+            boolean[] chromosome;
+            chromosome = new boolean[items.length];
 
             for (int j = 0; j < chromosome.length; j++) {
                 if (ThreadLocalRandom.current().nextDouble() < 0.1) {
